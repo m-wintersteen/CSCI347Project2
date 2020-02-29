@@ -9,6 +9,7 @@
 import numpy as np
 import pandas as pd
 import math
+import networkx as nx
 
 # Takes a graph G (list of edges) and a vertex v and returns the degree of v
 def getDegree(G, v):
@@ -40,15 +41,69 @@ def getVertClustC(G, v):
 
 # Takes a graph G and returns the clustering coefficent of G
 def getGraphClustC(G):
-    return 0
+    cc = 0
+    #get list of vertices in G
+    vert = []
+    for e in G:
+        if e[0] not in vert:
+            vert.append(e[0])
+        if e[1] not in vert:
+            vert.append(e[1])
+
+    #sum individual clustering coefficients
+    for v in vert:
+        cc += getVertClustC(G, v)
+        
+    return cc
 
 # Takes a graph G and a vertex v and return the closeness centrality of v
 def getCloseC(G, v):
-    return 0
+    #make networkx graph
+    Gprime = nx.Graph()
+    Gprime.add_edges_from(G)
+    #all other nodes in graph
+    y = []
+    for e in G:
+        if e[0] != v:
+            if e[0] not in y:
+                y.append(e[0])
+        if e[1] != v:
+            if e[1] not in y:
+                y.append(e[1])
+
+    spsum = 0
+    for i in y:
+        spsum += len(nx.shortest_path(Gprime, source=v, target=i))
+    
+    return 1/spsum
 
 # Takes a graph G and a vertex v and return the betweenness centrality of v
 def getBC(G, v):
-    return 0
+    #make networkx graph
+    Gprime = nx.Graph()
+    Gprime.add_edges_from(G)
+    #all other nodes in graph
+    y = []
+    for e in G:
+        if e[0] != v:
+            if e[0] not in y:
+                y.append(e[0])
+        if e[1] != v:
+            if e[1] not in y:
+                y.append(e[1])
+
+    spsum = 0
+    num = 0
+    den = 0
+    for i in y:
+        for k in y:
+            if i != k:
+                for p in nx.all_shortest_paths(Gprime, source=i, target=k):
+                    den += 1
+                    if v in p:
+                        num += 1
+                        
+    return num/den
 
 # Takes a graph G and returns the average shortest path
 def getMeanShortPath(G):
