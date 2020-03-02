@@ -1,14 +1,12 @@
 import csv
 from itertools import islice
 import numpy as np
-import networkx as nx
 
 def slice_dataset():
     with open('dataset/amazon0302.csv') as csvfile:
         csvreader = csv.reader(csvfile, delimiter=',')
         nodes = []
         edge_list = []
-        G = nx.Graph()
 
 
     # the total number of pairs = 1048575
@@ -28,5 +26,7 @@ def slice_dataset():
 
         return(edge_list)
 
-print(slice_dataset())
+
+if __name__ == "__main__":
+    print(slice_dataset())
 

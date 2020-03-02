@@ -11,6 +11,7 @@ import pandas as pd
 import math
 import networkx as nx
 
+
 # Takes a graph G (list of edges) and a vertex v and returns the degree of v
 def getDegree(G, v):
     degree = 0
@@ -18,6 +19,7 @@ def getDegree(G, v):
         if v in e:
             degree += 1
     return degree
+
 
 # Takes a graph G and a vertex v and returns
 # the clustering coefficient of v
@@ -36,13 +38,14 @@ def getVertClustC(G, v):
         if e[0] in v_neighbors and e[1] in v_neighbors:
             numerator += 1
 
-    denominator = (len(v_neighbors)*(len(v_neighbors)-1))/2
-    return numerator/denominator
+    denominator = (len(v_neighbors) * (len(v_neighbors) - 1)) / 2
+    return numerator / denominator
+
 
 # Takes a graph G and returns the clustering coefficent of G
 def getGraphClustC(G):
     cc = 0
-    #get list of vertices in G
+    # get list of vertices in G
     vert = []
     for e in G:
         if e[0] not in vert:
@@ -50,18 +53,19 @@ def getGraphClustC(G):
         if e[1] not in vert:
             vert.append(e[1])
 
-    #sum individual clustering coefficients
+    # sum individual clustering coefficients
     for v in vert:
         cc += getVertClustC(G, v)
-        
+
     return cc
+
 
 # Takes a graph G and a vertex v and return the closeness centrality of v
 def getCloseC(G, v):
-    #make networkx graph
+    # make networkx graph
     Gprime = nx.Graph()
     Gprime.add_edges_from(G)
-    #all other nodes in graph
+    # all other nodes in graph
     y = []
     for e in G:
         if e[0] != v:
@@ -74,15 +78,16 @@ def getCloseC(G, v):
     spsum = 0
     for i in y:
         spsum += len(nx.shortest_path(Gprime, source=v, target=i))
-    
-    return 1/spsum
+
+    return 1 / spsum
+
 
 # Takes a graph G and a vertex v and return the betweenness centrality of v
 def getBC(G, v):
-    #make networkx graph
+    # make networkx graph
     Gprime = nx.Graph()
     Gprime.add_edges_from(G)
-    #all other nodes in graph
+    # all other nodes in graph
     y = []
     for e in G:
         if e[0] != v:
@@ -102,28 +107,30 @@ def getBC(G, v):
                     den += 1
                     if v in p:
                         num += 1
-                        
-    return num/den
+
+    return num / den
+
 
 # Takes a graph G and returns the average shortest path
 def getMeanShortPath(G):
-    #make networkx graph
+    # make networkx graph
     Gprime = nx.Graph()
     Gprime.add_edges_from(G)
-    #get list of nodes
+    # get list of nodes
     v = list(Gprime.nodes)
     total = 0
     num = 0
     for i in range(len(v)):
-        for k in range(i,len(v)):
+        for k in range(i, len(v)):
             if i != k:
                 total += len(nx.shortest_path(Gprime, v[i], v[k]))
                 num += 1
-    avg = total/num
+    avg = total / num
     return avg
 
+
 def testFunc():
-    G = np.array([[1,2],[2,3],[1,3],[3,4],[4,2],[4,5],[5,1]])
+    G = np.array([[1, 2], [2, 3], [1, 3], [3, 4], [4, 2], [4, 5], [5, 1]])
     Gprime = nx.Graph()
     Gprime.add_edges_from(G)
     v = 1
@@ -140,6 +147,7 @@ def testFunc():
     print("\n9.\ngetMeanShortPath")
     print(getMeanShortPath(G))
 
-#driver for function testing
-testFunc()
-    
+
+# driver for function testing
+if __name__ == "__main__":
+    testFunc()
