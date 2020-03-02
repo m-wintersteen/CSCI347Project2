@@ -14,10 +14,47 @@ def visualize_Graph():
 # top 10 by betweenness
 def top_betweenness():
     betweenness = []
-    for i in node_list
+    for i in node_list:
         print(i)
         betweenness.append(Project2.getBC(edge_list, i))
     print(type(betweenness))
+
+
+def top_eccentricity():
+    eccentricity_dict = nx.eccentricity(G)
+    maxium_value_dict = {}
+
+    for i in range(10):
+        for key, value in eccentricity_dict.items():
+            if value > max:
+                max = key
+        maxium_value_dict.update({max: eccentricity_dict[max]})
+    return maxium_value_dict
+
+
+def top_eigenvector():
+    eigenvector_dict = nx.eigenvector_centrality(G)
+    maxium_value_dict = {}
+
+    for i in range(10):
+        for key, value in eigenvector_dict.items():
+            if value > max:
+                max = key
+        maxium_value_dict.update({max: eigenvector_dict[max]})
+    return maxium_value_dict
+
+def top_pagerank():
+    pagerank_dict = nx.pagerank(G)
+    maxium_value_dict = {}
+
+    for i in range(10):
+        for key, value in pagerank_dict.items():
+            if value > max:
+                max = key
+        maxium_value_dict.update({max: pagerank_dict[max]})
+    return maxium_value_dict
+
+
 
 
 if __name__ == "__main__":
@@ -26,7 +63,6 @@ if __name__ == "__main__":
     G.add_edges_from(edge_list)
     node_list = G.nodes()
 
-
-    #visualize_Graph()
+    visualize_Graph()
 
     top_betweenness()
