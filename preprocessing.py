@@ -28,5 +28,5 @@ def slice_dataset():
 
 
 if __name__ == "__main__":
-    print(slice_dataset())
-
+    edge_list = slice_dataset()
+    print(edge_list)
