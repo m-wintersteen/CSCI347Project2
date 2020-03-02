@@ -65,4 +65,12 @@ if __name__ == "__main__":
 
     visualize_Graph()
 
-    top_betweenness()
+    # using our own functions
+    top_betweeness_dict = top_betweenness()
+
+    # using networkx functions
+    top_eccentricity_dict = top_eccentricity()
+    top_eigenvector_dict = top_eigenvector()
+    top_pagerank_dict = top_pagerank()
+
+
