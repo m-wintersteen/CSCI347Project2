@@ -107,10 +107,25 @@ def getBC(G, v):
 
 # Takes a graph G and returns the average shortest path
 def getMeanShortPath(G):
-    return 0
+    #make networkx graph
+    Gprime = nx.Graph()
+    Gprime.add_edges_from(G)
+    #get list of nodes
+    v = list(Gprime.nodes)
+    total = 0
+    num = 0
+    for i in range(len(v)):
+        for k in range(i,len(v)):
+            if i != k:
+                total += len(nx.shortest_path(Gprime, v[i], v[k]))
+                num += 1
+    avg = total/num
+    return avg
 
 def testFunc():
     G = np.array([[1,2],[2,3],[1,3],[3,4],[4,2],[4,5],[5,1]])
+    Gprime = nx.Graph()
+    Gprime.add_edges_from(G)
     v = 1
     print("Part 2.\n4.\ngetDegree")
     print(getDegree(G, v))
