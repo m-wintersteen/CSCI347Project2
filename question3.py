@@ -22,11 +22,11 @@ def top_betweenness():
 
 
 def top_closeness():
-    closeness = []
+    closeness = {}
     for i in node_list:
-        closeness.append(Project2.getCloseC(edge_list, i))
-    closeness.sort()
-    return closeness[:10]
+        closeness.update({i: Project2.getCloseC(edge_list, i)})
+    closeness = {k: v for k, v in sorted(closeness.items(), key=lambda item: item[1])}
+    return dict(list(closeness.items())[0:10])
 
 
 def top_eccentricity():
