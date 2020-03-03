@@ -29,7 +29,7 @@ def randomreduce():
         #return(edge_list)
         G.add_edges_from(edge_list)
         for n in list(G.nodes):
-            if random.randint(0,100) < 98:
+            if random.randint(0,100) < 90:
                 G.remove_node(n)
         return G
 
