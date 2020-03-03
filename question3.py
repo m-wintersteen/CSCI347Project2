@@ -31,35 +31,35 @@ def top_closeness():
 def top_eccentricity():
     eccentricity_dict = nx.eccentricity(G)
     maxium_value_dict = {}
-
+    maxv = 0
     for i in range(10):
         for key, value in eccentricity_dict.items():
-            if value > max:
-                max = key
-        maxium_value_dict.update({max: eccentricity_dict[max]})
+            if value > maxv:
+                maxv = key
+        maxium_value_dict.update({maxv: eccentricity_dict[maxv]})
     return maxium_value_dict
 
 
 def top_eigenvector():
     eigenvector_dict = nx.eigenvector_centrality(G)
     maxium_value_dict = {}
-
+    maxv = 0
     for i in range(10):
         for key, value in eigenvector_dict.items():
-            if value > max:
-                max = key
-        maxium_value_dict.update({max: eigenvector_dict[max]})
+            if value > maxv:
+                maxv = key
+        maxium_value_dict.update({maxv: eigenvector_dict[maxv]})
     return maxium_value_dict
 
 def top_pagerank():
     pagerank_dict = nx.pagerank(G)
     maxium_value_dict = {}
-
+    maxv = 0
     for i in range(10):
         for key, value in pagerank_dict.items():
-            if value > max:
-                max = key
-        maxium_value_dict.update({max: pagerank_dict[max]})
+            if value > maxv:
+                maxv = key
+        maxium_value_dict.update({maxv: pagerank_dict[maxv]})
     return maxium_value_dict
 
 

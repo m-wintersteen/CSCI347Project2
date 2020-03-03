@@ -39,7 +39,10 @@ def getVertClustC(G, v):
             numerator += 1
 
     denominator = (len(v_neighbors) * (len(v_neighbors) - 1)) / 2
-    return numerator / denominator
+    if denominator != 0:
+        return numerator / denominator
+    else:
+        return 0
 
 
 # Takes a graph G and returns the clustering coefficent of G
@@ -107,7 +110,6 @@ def getBC(G, v):
                     den += 1
                     if v in p:
                         num += 1
-
     return num / den
 
 

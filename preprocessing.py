@@ -5,6 +5,8 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import random
 
+file_name = "reduced_data/reduce_random.edgelist"
+
 def connected_component_subgraphs(G):
     for c in nx.connected_components(G):
         yield G.subgraph(c)
@@ -27,7 +29,7 @@ def randomreduce():
         #return(edge_list)
         G.add_edges_from(edge_list)
         for n in list(G.nodes):
-            if random.randint(0,100) < 84:
+            if random.randint(0,100) < 98:
                 G.remove_node(n)
         return G
 
@@ -43,11 +45,13 @@ def get_list_data_from_file():
     return edge_list
 
 
-G = randomreduce()
-Gc = max(connected_component_subgraphs(G), key=len)
-file_name = "reduced_data/reduce_random.edgelist"
-nx.write_edgelist(Gc, file_name)
-get_list_data_from_file()
+# driver for preprocessing
+if __name__ == "__main__":
+    G = randomreduce()
+    Gc = max(connected_component_subgraphs(G), key=len)
+    
+    nx.write_edgelist(Gc, file_name)
+    get_list_data_from_file()
 
 
 
