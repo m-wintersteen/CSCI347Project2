@@ -15,9 +15,17 @@ def visualize_Graph():
 def top_betweenness():
     betweenness = []
     for i in node_list:
-        print(i)
         betweenness.append(Project2.getBC(edge_list, i))
-    print(type(betweenness))
+    betweenness.sort()
+    return betweenness[:10]
+
+
+def top_closeness():
+    closeness = []
+    for i in node_list:
+        closeness.append(Project2.getCloseC(edge_list, i))
+    closeness.sort()
+    return closeness[:10]
 
 
 def top_eccentricity():
@@ -66,11 +74,17 @@ if __name__ == "__main__":
     visualize_Graph()
 
     # using our own functions
-    top_betweeness_dict = top_betweenness()
+    top_betweeness_list = top_betweenness()
+    top_closeness_list = top_betweenness()
 
     # using networkx functions
     top_eccentricity_dict = top_eccentricity()
     top_eigenvector_dict = top_eigenvector()
     top_pagerank_dict = top_pagerank()
+
+
+    top_betweenness =
+
+
 
 
