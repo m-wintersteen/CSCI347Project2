@@ -123,11 +123,11 @@ def getMeanShortPath(G):
     total = 0
     num = 0
     for i in range(len(v)):
-        for k in range(i, len(v)):
+        for k in range(len(v)):
             if i != k:
                 total += len(nx.shortest_path(Gprime, v[i], v[k]))
                 num += 1
-    avg = total / num
+    avg = (total / num)-1
     return avg
 
 

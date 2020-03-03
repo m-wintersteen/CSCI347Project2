@@ -21,11 +21,11 @@ def top_betweenness():
 
 
 def top_closeness():
-    closeness = []
+    closeness = {}
     for i in node_list:
-        closeness.append(Project2.getCloseC(edge_list, i))
-    closeness.sort()
-    return closeness[:10]
+        closeness.update({i: Project2.getCloseC(edge_list, i)})
+    closeness = {k: v for k, v in sorted(closeness.items(), key=lambda item: item[1])}
+    return dict(list(closeness.items())[0:10])
 
 
 def top_eccentricity():
@@ -71,32 +71,40 @@ if __name__ == "__main__":
     G.add_edges_from(edge_list)
     node_list = G.nodes()
 
-    visualize_Graph()
+    #visualize_Graph()
 
     # using our own functions
     top_betweeness_list = top_betweenness()
-    top_closeness_list = top_betweenness()
+    print(top_betweeness_list)
+    top_closeness_list = top_closeness()
+    print(top_closeness_list)
 
     # using networkx functions
     top_eccentricity_dict = top_eccentricity()
+    print(top_eccentricity_dict)
     top_eigenvector_dict = top_eigenvector()
+    print(top_eigenvector_dict)
     top_pagerank_dict = top_pagerank()
+    print(top_pagerank_dict)
 
     # clustering coef of top 5 betweenness centrality nodes
     clusteringC = []
     for i in top_betweeness_list:
         clusteringC.append(Project2.getVertClustC(edge_list, i))
+    print(clusteringC)
 
     # clustering coef of top 5 betweenness centrality nodes
     clusteringC = []
     for i in top_closeness_list:
         clusteringC.append(Project2.getCloseC(edge_list, i))
+    print(clusteringC)
 
     # find the cluster coefficient of the graph
-    Project2.getGraphClustC(edge_list)
+    print(Project2.getGraphClustC(edge_list))
 
     # compute the average shortest path distance in the graph
-    nx.average_shortest_path_length(G)
+    print(nx.average_shortest_path_length(G))
+    print(Project2.getMeanShortPath(edge_list))
 
 
 
