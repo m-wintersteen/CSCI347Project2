@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 # visualize our Graph
 def visualize_Graph():
-    nx.draw_networkx(G, with_labels=False, node_size=.8)
+    nx.draw_networkx(G, with_labels=False, node_size=.9)
     plt.show()
 
 
@@ -80,36 +80,43 @@ if __name__ == "__main__":
     #visualize_Graph()
 
     # using our own functions
-    #top_betweeness_list = top_betweenness()
-    #print("top_betweeness")
-    #print(top_betweeness_list)
+    top_betweeness_list = top_betweenness()
+    print("top_betweeness")
+    print(top_betweeness_list)
 
-    #print("top_closeness")
-    #top_closeness_list = top_betweenness()
-    #print(top_closeness_list)
+    print("top_closeness")
+    top_closeness_list = top_betweenness()
+    print(top_closeness_list)
 
-    # using networkx functions
-    #top_eccentricity_dict = top_eccentricity()
-    #print("top_eccentricity")
-    #print(top_eccentricity_dict)
-    #top_eigenvector_dict = top_eigenvector()
-    #print("top_eigenvector")
-    #print(top_eigenvector_dict)
-    #top_pagerank_dict = top_pagerank()
-    #print("top_pagerank")
-    #print(top_pagerank_dict)
+     using networkx functions
+    top_eccentricity_dict = top_eccentricity()
+    print("top_eccentricity")
+    print(top_eccentricity_dict)
+    top_eigenvector_dict = top_eigenvector()
+    print("top_eigenvector")
+    print(top_eigenvector_dict)
+    top_pagerank_dict = top_pagerank()
+    print("top_pagerank")
+    print(top_pagerank_dict)
 
-    '''
-    # clustering coef of top 5 betweenness centrality nodes
+
+    #clustering coef of top 5 betweenness centrality nodes
+
+    top_betweeness_list = [112648, 74251, 164876, 197137, 201234]
     clusteringC = []
     for i in top_betweeness_list:
-        clusteringC.append(Project2.getVertClustC(edge_list, i))
+        clusteringC.append(Project2.getCloseC(edge_list, i))
+    print("clustering coefiecient of top betweenness nodes")
+    print(clusteringC)
 
+    top_closeness_list = [112648, 74251, 164876, 197137, 201234]
     # clustering coef of top 5 betweenness centrality nodes
     clusteringC = []
     for i in top_closeness_list:
         clusteringC.append(Project2.getCloseC(edge_list, i))
-    '''
+    print("clustering coefiecient of top closeness nodes")
+    print(clusteringC)
+    
 
     # find the cluster coefficient of the graph
     print("clustering coefficient of the graph")
@@ -119,13 +126,30 @@ if __name__ == "__main__":
     print("average shortest path distance in the graph")
     print(nx.average_shortest_path_length(G))
 
+    
 
     # plot degree distribution
-    degree_vals = []
-    for i in node_list:
-        degree_vals.append(i)
-    plt.hist(degree_vals)
     
+
+    
+
+
+
+    f = np.asarray(nx.degree_histogram(G))/sum(np.asarray(nx.degree_histogram(G)))
+    nx.degree_histogram(G)
+    plt.show()
+    plt.loglog(np.arange(len(nx.degree_histogram(G))), f, 'r.')
+    plt.xlabel('k (degree)')
+    plt.ylabel('log f(k) (proportion of nodes with degree k)')
+    plt.show()
+    
+    degree = dict(nx.degree(G)).values()
+    plt.loglog((degree), 'r.')
+    plt.xlabel('node degree')
+    plt.ylabel('avg clustering coef by each degree)')
+    plt.show()
+    
+
 
 
 
