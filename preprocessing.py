@@ -9,35 +9,7 @@ def connected_component_subgraphs(G):
     for c in nx.connected_components(G):
         yield G.subgraph(c)
 
-def slice_dataset():
-    with open('dataset/amazon0302.csv') as csvfile:
-        csvreader = csv.reader(csvfile, delimiter=',')
-        nodes = []
-        edge_list = []
-        G = nx.Graph()
 
-
-    # the total number of pairs = 1048575
-    # we are using only 8000
-
-        for row in islice(csvreader, 1047575, None):
-        #for row in csvreader:
-
-            fromNode = int(row[0])
-            toNode = int(row[1])
-
-            nodes.append(fromNode)
-            nodes.append(toNode)
-
-            edge = [fromNode, toNode]
-            edge_list.append(edge)
-
-
-        #return(edge_list)
-        G.add_edges_from(edge_list)
-        H = G.subgraph(nodes)
-        nx.draw_networkx(H, with_labels=False)
-        plt.show()
 def randomreduce():
     with open('dataset/amazon0302.csv') as csvfile:
         csvreader = csv.reader(csvfile, delimiter=',')
@@ -59,17 +31,23 @@ def randomreduce():
                 G.remove_node(n)
         return G
 
+def get_list_data_from_file():
+    edge_list = []
+    with open(file_name) as csvfile:
+        readCSV = csv.reader(csvfile, delimiter=" ")
+        for row in readCSV:
+            fromNode = int(row[0])
+            toNode = int(row[1])
+            edge = [fromNode, toNode]
+            edge_list.append(edge)
+    return edge_list
 
-#print(slice_dataset())
-#slice_dataset()
+
 G = randomreduce()
-
 Gc = max(connected_component_subgraphs(G), key=len)
 file_name = "reduced_data/reduce_random.edgelist"
 nx.write_edgelist(Gc, file_name)
-
-#nx.draw_networkx(Gc, with_labels=False)
-#plt.show()
+get_list_data_from_file()
 
 
 

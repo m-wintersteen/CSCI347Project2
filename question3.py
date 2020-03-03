@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 # visualize our Graph
 def visualize_Graph():
-    nx.draw_networkx(G, with_labels=False, node_size=1)
+    nx.draw_networkx(G, with_labels=False, node_size=.8)
     plt.show()
 
 
@@ -67,7 +67,7 @@ def top_pagerank():
 
 if __name__ == "__main__":
     G = nx.Graph()
-    edge_list = preprocessing.slice_dataset()
+    edge_list = preprocessing.get_list_data_from_file()
     G.add_edges_from(edge_list)
     node_list = G.nodes()
 
