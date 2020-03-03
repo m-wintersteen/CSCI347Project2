@@ -13,11 +13,11 @@ def visualize_Graph():
 
 # top 10 by betweenness
 def top_betweenness():
-    betweenness = []
+    betweenness = {}
     for i in node_list:
-        betweenness.append(Project2.getBC(edge_list, i))
-    betweenness.sort()
-    return betweenness[:10]
+        betweenness.update({i: Project2.getBC(edge_list, i)})
+    betweenness = {k: v for k, v in sorted(betweenness.items(), key=lambda item: item[1])}
+    return dict(list(betweenness.items())[0:10])
 
 
 def top_closeness():
@@ -93,7 +93,7 @@ if __name__ == "__main__":
         clusteringC.append(Project2.getCloseC(edge_list, i))
 
     # find the cluster coefficient of the graph
-    Project2.getGraphClustC()
+    Project2.getGraphClustC(edge_list)
 
     # compute the average shortest path distance in the graph
     nx.average_shortest_path_length(G)
