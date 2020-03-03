@@ -82,8 +82,25 @@ if __name__ == "__main__":
     top_eigenvector_dict = top_eigenvector()
     top_pagerank_dict = top_pagerank()
 
+    # clustering coef of top 5 betweenness centrality nodes
+    clusteringC = []
+    for i in top_betweeness_list:
+        clusteringC.append(Project2.getVertClustC(G, i))
 
-    top_betweenness =
+    # clustering coef of top 5 betweenness centrality nodes
+    clusteringC = []
+    for i in top_closeness_list:
+        clusteringC.append(Project2.getCloseC(G, i))
+
+    # find the cluster coefficient of the graph
+    Project2.getGraphClustC()
+
+    # compute the average shortest path distance in the graph
+    nx.average_shortest_path_length(G)
+
+
+
+
 
 
 
