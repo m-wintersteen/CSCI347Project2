@@ -85,12 +85,12 @@ if __name__ == "__main__":
     # clustering coef of top 5 betweenness centrality nodes
     clusteringC = []
     for i in top_betweeness_list:
-        clusteringC.append(Project2.getVertClustC(G, i))
+        clusteringC.append(Project2.getVertClustC(edge_list, i))
 
     # clustering coef of top 5 betweenness centrality nodes
     clusteringC = []
     for i in top_closeness_list:
-        clusteringC.append(Project2.getCloseC(G, i))
+        clusteringC.append(Project2.getCloseC(edge_list, i))
 
     # find the cluster coefficient of the graph
     Project2.getGraphClustC()
